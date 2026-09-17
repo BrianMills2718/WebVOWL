@@ -121,6 +121,76 @@ module.exports = function ( graph ){
     }
     graph.updateStyle(); // updates graph representation(setting charges and distances)
   };
+
+  /*
+   * O→A's relation model has typed role slots. A role is not a second relation
+   * endpoint, so stock WebVOWL drops it when no OWL range exists. The fork
+   * expands each o2a.roleSpoke into a visible, explicitly labelled role node
+   * and a relation-to-role property before the normal parser runs. The source
+   * object is copied, which also prevents the normal set-operator expansion
+   * from mutating a cached O→A download on repeated loads.
+   */
+  function expandO2ARoleSpokes(ontologyData){
+    if ( !ontologyData.o2a || !Array.isArray(ontologyData.o2a.roleSpokes) ) {
+      return ontologyData;
+    }
+
+    var expanded = {}, key;
+    for ( key in ontologyData ) {
+      if ( ontologyData.hasOwnProperty(key) ) {
+        expanded[key] = ontologyData[key];
+      }
+    }
+    expanded.class = (ontologyData.class || []).slice();
+    expanded.classAttribute = (ontologyData.classAttribute || []).slice();
+    expanded.property = (ontologyData.property || []).slice();
+    expanded.propertyAttribute = (ontologyData.propertyAttribute || []).slice();
+
+    var relationIds = {}, attributes = expanded.classAttribute;
+    (ontologyData.o2a.relationTypes || []).forEach(function ( relation ){
+      var matchingAttribute = attributes.filter(function ( attribute ){
+        return attribute.label && attribute.label.undefined === relation.label;
+      })[0];
+      if ( matchingAttribute ) {
+        relationIds[relation.id] = String(matchingAttribute.id);
+      }
+    });
+
+    ontologyData.o2a.roleSpokes.forEach(function ( spoke ){
+      var relationId = relationIds[spoke.relation];
+      if ( typeof relationId === "undefined" ) {
+        console.warn("No O→A relation class was found for role spoke: " + spoke.id);
+        return;
+      }
+      var roleNodeId = "o2a-role:" + spoke.id;
+      var rolePropertyId = "o2a-spoke:" + spoke.id;
+      var constraintIds = (spoke.bindingConstraints || []).map(function ( constraint ){
+        return constraint.id;
+      });
+      var comment = "Typed role of " + spoke.relation + ". " + (spoke.comment || "");
+      if ( constraintIds.length ) {
+        comment += " Binding constraints: " + constraintIds.join(", ") + ".";
+      }
+      expanded.class.push({ id: roleNodeId, type: "owl:Class" });
+      expanded.classAttribute.push({
+        id: roleNodeId,
+        label: { undefined: "role · " + spoke.label },
+        iri: "https://o2a.local/role/" + encodeURIComponent(spoke.id),
+        comment: comment,
+        attributes: []
+      });
+      expanded.property.push({ id: rolePropertyId, type: "owl:ObjectProperty" });
+      expanded.propertyAttribute.push({
+        id: rolePropertyId,
+        domain: relationId,
+        range: roleNodeId,
+        label: { undefined: spoke.label },
+        comment: "O→A role spoke; this is a typed role slot, not a binary relation target.",
+        attributes: []
+      });
+    });
+    return expanded;
+  }
   
   
   /**
@@ -134,6 +204,7 @@ module.exports = function ( graph ){
       dictionary = [];
       return;
     }
+    ontologyData = expandO2ARoleSpokes(ontologyData);
     dictionary = [];
     if ( ontologyData.settings ) settingsData = ontologyData.settings;
     else settingsData = undefined;
@@ -726,8 +797,11 @@ module.exports = function ( graph ){
   function findId( object ){
     if ( !object ) {
       return undefined;
-    } else if ( typeof object === "string" ) {
-      return object;
+    } else if ( typeof object === "string" || typeof object === "number" ) {
+      // OWL2VOWL historically serializes identifiers as strings, but a JSON
+      // producer may reasonably use numeric IDs. Normalize both forms at the
+      // parser boundary so domain/range lookup remains stable.
+      return String(object);
     } else if ( "id" in object ) {
       return object.id();
     } else {
