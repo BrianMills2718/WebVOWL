@@ -35,6 +35,16 @@ module.exports = function ( graph ){
     return settingsImportGraphZoomAndTranslation;
   };
   
+  /*
+   * A settings value is present when the key carries a value. Truthiness is
+   * not presence: exported settings legitimately contain false (paused) and 0
+   * (distances, degree slider, translation components). null is treated as
+   * absent, as it was before, so a null never reaches a graph setter.
+   */
+  function hasSetting( value ){
+    return value !== undefined && value !== null;
+  }
+
   parser.parseSettings = function (){
     settingsImported = true;
     settingsImportGraphZoomAndTranslation = false;
@@ -45,30 +55,30 @@ module.exports = function ( graph ){
     }
     /** global settings **********************************************************/
     if ( settingsData.global ) {
-      if ( settingsData.global.zoom ) {
+      if ( hasSetting(settingsData.global.zoom) ) {
         var zoomFactor = settingsData.global.zoom;
         graph.setZoom(zoomFactor);
         settingsImportGraphZoomAndTranslation = true;
       }
       
-      if ( settingsData.global.translation ) {
+      if ( hasSetting(settingsData.global.translation) ) {
         var translation = settingsData.global.translation;
         graph.setTranslation(translation);
         settingsImportGraphZoomAndTranslation = true;
       }
       
-      if ( settingsData.global.paused ) {
+      if ( hasSetting(settingsData.global.paused) ) {
         var paused = settingsData.global.paused;
         graph.options().pausedMenu().setPauseValue(paused);
       }
     }
     /** Gravity Settings  **********************************************************/
     if ( settingsData.gravity ) {
-      if ( settingsData.gravity.classDistance ) {
+      if ( hasSetting(settingsData.gravity.classDistance) ) {
         var classDistance = settingsData.gravity.classDistance;
         graph.options().classDistance(classDistance);
       }
-      if ( settingsData.gravity.datatypeDistance ) {
+      if ( hasSetting(settingsData.gravity.datatypeDistance) ) {
         var datatypeDistance = settingsData.gravity.datatypeDistance;
         graph.options().datatypeDistance(datatypeDistance);
       }
@@ -93,7 +103,7 @@ module.exports = function ( graph ){
         }
       }
       // node degree filter settings
-      if ( settingsData.filter.degreeSliderValue ) {
+      if ( hasSetting(settingsData.filter.degreeSliderValue) ) {
         var degreeSliderValue = settingsData.filter.degreeSliderValue;
         graph.options().filterMenu().setDegreeSliderValue(degreeSliderValue);
       }
@@ -768,12 +778,13 @@ module.exports = function ( graph ){
   /**
    * Replaces the namespace (and the separator) if one exists and returns the new value.
    * @param address the address with a namespace in it
-   * @param namespaces an array of namespaces
+   * @param namespaces an array of namespaces; absent when the ontology JSON has
+   *        no top-level namespace field, which leaves the address unchanged
    * @returns {string} the processed address with the (possibly) replaced namespace
    */
   function replaceNamespace( address, namespaces ){
     var separatorIndex = address.indexOf(":");
-    if ( separatorIndex === -1 ) {
+    if ( separatorIndex === -1 || !namespaces ) {
       return address;
     }
     var namespaceName = address.substring(0, separatorIndex);
