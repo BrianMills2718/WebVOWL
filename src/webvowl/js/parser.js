@@ -36,12 +36,13 @@ module.exports = function ( graph ){
   };
   
   /*
-   * A settings value is present when the key carries a value. Truthiness is
-   * not presence: exported settings legitimately contain false (paused) and 0
-   * (distances, degree slider, translation components). null is treated as
-   * absent, as it was before, so a null never reaches a graph setter.
+   * A value is present when the key carries a value. Truthiness is not
+   * presence: ids and indexes can be 0, and exported settings legitimately
+   * contain false (paused) and 0 (distances, degree slider, translation
+   * components). null is treated as absent, as it was before, so a null never
+   * reaches a graph setter or an id lookup.
    */
-  function hasSetting( value ){
+  function isPresent( value ){
     return value !== undefined && value !== null;
   }
 
@@ -55,30 +56,30 @@ module.exports = function ( graph ){
     }
     /** global settings **********************************************************/
     if ( settingsData.global ) {
-      if ( hasSetting(settingsData.global.zoom) ) {
+      if ( isPresent(settingsData.global.zoom) ) {
         var zoomFactor = settingsData.global.zoom;
         graph.setZoom(zoomFactor);
         settingsImportGraphZoomAndTranslation = true;
       }
       
-      if ( hasSetting(settingsData.global.translation) ) {
+      if ( isPresent(settingsData.global.translation) ) {
         var translation = settingsData.global.translation;
         graph.setTranslation(translation);
         settingsImportGraphZoomAndTranslation = true;
       }
       
-      if ( hasSetting(settingsData.global.paused) ) {
+      if ( isPresent(settingsData.global.paused) ) {
         var paused = settingsData.global.paused;
         graph.options().pausedMenu().setPauseValue(paused);
       }
     }
     /** Gravity Settings  **********************************************************/
     if ( settingsData.gravity ) {
-      if ( hasSetting(settingsData.gravity.classDistance) ) {
+      if ( isPresent(settingsData.gravity.classDistance) ) {
         var classDistance = settingsData.gravity.classDistance;
         graph.options().classDistance(classDistance);
       }
-      if ( hasSetting(settingsData.gravity.datatypeDistance) ) {
+      if ( isPresent(settingsData.gravity.datatypeDistance) ) {
         var datatypeDistance = settingsData.gravity.datatypeDistance;
         graph.options().datatypeDistance(datatypeDistance);
       }
@@ -103,7 +104,7 @@ module.exports = function ( graph ){
         }
       }
       // node degree filter settings
-      if ( hasSetting(settingsData.filter.degreeSliderValue) ) {
+      if ( isPresent(settingsData.filter.degreeSliderValue) ) {
         var degreeSliderValue = settingsData.filter.degreeSliderValue;
         graph.options().filterMenu().setDegreeSliderValue(degreeSliderValue);
       }
@@ -156,13 +157,33 @@ module.exports = function ( graph ){
     expanded.property = (ontologyData.property || []).slice();
     expanded.propertyAttribute = (ontologyData.propertyAttribute || []).slice();
 
+    /*
+     * Resolve each relation type to its class by relation id, never by label:
+     * labels need not be unique. relationTypes carry only {id, label, ...}; the
+     * stable link is the class IRI, which the O→A exporter
+     * (observation-to-action-metamodel explorer/model.mjs,
+     * createWebVowlProjection) writes as the o2a namespace IRI +
+     * encodeURIComponent(relation.id). A relation with no class, or with more
+     * than one class, at that IRI gets no spokes and a warning.
+     */
     var relationIds = {}, attributes = expanded.classAttribute;
+    var o2aNamespace = (ontologyData.namespace || []).filter(function ( namespace ){
+      return namespace && namespace.name === "o2a";
+    })[0];
     (ontologyData.o2a.relationTypes || []).forEach(function ( relation ){
-      var matchingAttribute = attributes.filter(function ( attribute ){
-        return attribute.label && attribute.label.undefined === relation.label;
-      })[0];
-      if ( matchingAttribute ) {
-        relationIds[relation.id] = String(matchingAttribute.id);
+      if ( !o2aNamespace ) {
+        console.warn("No o2a namespace, so O→A relation " + relation.id + " cannot be resolved to a class");
+        return;
+      }
+      var relationIri = o2aNamespace.iri + encodeURIComponent(relation.id);
+      var matchingAttributes = attributes.filter(function ( attribute ){
+        return attribute.iri === relationIri;
+      });
+      if ( matchingAttributes.length === 1 ) {
+        relationIds[relation.id] = String(matchingAttributes[0].id);
+      } else {
+        console.warn(matchingAttributes.length + " classes have the IRI of O→A relation " + relation.id +
+          " (" + relationIri + "); its role spokes are not drawn");
       }
     });
 
@@ -511,11 +532,11 @@ module.exports = function ( graph ){
       
       /* Skip properties that have no information about their domain and range, like
        inverse properties with optional inverse and optional domain and range attributes */
-      if ( (property.domain() && property.range()) || property.inverse() ) {
+      if ( (isPresent(property.domain()) && isPresent(property.range())) || isPresent(property.inverse()) ) {
         
         var inversePropertyId = findId(property.inverse());
         // Look if an inverse property exists
-        if ( inversePropertyId ) {
+        if ( inversePropertyId !== undefined ) {
           inverse = propertyMap[inversePropertyId];
           if ( !inverse ) {
             console.warn("No inverse property was found for id: " + inversePropertyId);
@@ -806,7 +827,7 @@ module.exports = function ( graph ){
    * @returns {string} the id of the passed object or undefined
    */
   function findId( object ){
-    if ( !object ) {
+    if ( !isPresent(object) ) {
       return undefined;
     } else if ( typeof object === "string" || typeof object === "number" ) {
       // OWL2VOWL historically serializes identifiers as strings, but a JSON
