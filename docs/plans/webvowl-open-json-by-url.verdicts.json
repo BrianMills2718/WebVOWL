@@ -1,0 +1,101 @@
+{
+  "062f8370db5661b7de29bc767338384da90aa240cc6d4dc1062da5fab0d8f4a4": {
+    "item_id": "CORE-SYSTEM-MODEL",
+    "materiality": "material",
+    "missing": "A valid system-model link and the required model-element, source-linked-view, freshness/drift, and reconciliation obligations are missing; the exemption is invalid because the plan explicitly concerns a user-facing WebVOWL viewer.",
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The plan states `System model: exempt -- WebVOWL is a static client-side viewer with no stored state`, but the requirement permits exemption only for projects with no stored state and no user-facing view. The evidence repeatedly describes a browser-rendered WebVOWL view, including `renders 30 O2A relation classes and 183 role nodes`, so the exemption does not apply.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-SYSTEM-MODEL",
+    "verdict": "unresolved"
+  },
+  "15e62fed15a5966306cececb37e0cbf72204f9c970515ed12c0462f06945e08a": {
+    "item_id": "CORE-TRACE-REVIEW",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The evidence names the run whose full trace is reviewed, identifies its committed location, and specifies checks beyond the final outcome, including the command, exit status, named checks, skipped status, reset state, and per-model-element output. It also explicitly states that no model, agent, or LLM pipeline runs occur under the plan.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-TRACE-REVIEW",
+    "verdict": "pass"
+  },
+  "29446f3d8631f96f1f5ea80c9147e9e13822e6efe4ebf64edf9f420c12b56c21": {
+    "item_id": "CORE-REQUIREMENTS-TRACED",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The plan provides an explicit requirements list with R1\u2013R3. Each requirement names a check and has the status \u201cplanned, not yet run\u201d; the plan also states that it makes no claim to follow an external standard and names no release or completion records requiring deferred requirements to be carried forward.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-REQUIREMENTS-TRACED",
+    "verdict": "pass"
+  },
+  "2c687d0cef46f70fc181e447d6fb5a1b3382614c3b3f3980eba61dd3cd7f3653": {
+    "item_id": "CORE-TRACE-DEBUGGING",
+    "materiality": "material",
+    "missing": "The evidence presents a heading for failures or surprises but does not explicitly establish that this procedure is separate from or distinct from anticipated failure modes.",
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The quoted procedure explicitly covers preserving the failed run and trace ID, reviewing full execution details, citing and classifying divergence, retaining the original, and linking repair to a new traced verification run. However, it does not explicitly state its separation from anticipated failure-mode handling, which is a named requirement.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-TRACE-DEBUGGING",
+    "verdict": "unresolved"
+  },
+  "840570ccea37b25a05af86acde87e7608464188c9e7dbeaca46de6e8cb6d2368": {
+    "item_id": "CORE-AUTHORITY-NONGOALS",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The evidence explicitly identifies Brian as the authority by stating he asked for the change in his own repository, and it explicitly lists non-goals: work outside the specified files, irreversible actions, and spending.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-AUTHORITY-NONGOALS",
+    "verdict": "pass"
+  },
+  "b093261ef80f79753543a364c3af59b00e68847ac7727b90f7d4141060003df5": {
+    "item_id": "CORE-SUCCESS-DISPROOF",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The plan explicitly defines success through a real-browser check that verifies every exported relation label and exactly one role node per exported role spoke, with 183 of 183 rendered, plus no unexpected console errors. It also provides concrete disproof conditions: no graph, a missing relation or role node, a non-404 console error, or failure to load the existing foaf preset.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-SUCCESS-DISPROOF",
+    "verdict": "pass"
+  },
+  "c1ca83a9ab5bb22c5d2cd39f8a39c0cd17244c65a1e2c58f5c377de79f406c46": {
+    "item_id": "CORE-CAPABILITY-REUSE",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The evidence explicitly identifies both catalogue files and states, \u201cNo catalogue entry fits,\u201d with a reason: the need is a loading fix inside a specific forked viewer that has no catalogue entry. This satisfies the requirement\u2019s no-entry alternative.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-CAPABILITY-REUSE",
+    "verdict": "pass"
+  },
+  "c4d9bc12be21ef1bbf231a8e628c34ec72a73f77c16c3be560a364493190cfca": {
+    "item_id": "OV-PROTO-VERTICAL-RESET",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The evidence explicitly names the minimal vertical result (direct JSON loading and numeric element IDs rendering), the reset boundary (`git revert` of the commit), and the non-goals (anything outside the two listed files). It also explicitly states there is no coordinated-work ceremony.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/OV-PROTO-VERTICAL-RESET",
+    "verdict": "pass"
+  },
+  "cfe261df0c063fc71af58218176922caf1db22af813072655c4897da1f51450c": {
+    "item_id": "CORE-ACTIVATION-FACTS",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The plan explicitly states no shared mechanism, no LLM at the centre, and no irreversible action or spend, matching the corresponding false facts. It does not propose an A/B test, benchmark, bake-off, or other experiment comparing alternatives; its checks verify the built result, and it makes no explicit claim to follow an external standard or schema. No evidence indicates an AES-governed target.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-ACTIVATION-FACTS",
+    "verdict": "pass"
+  },
+  "d7b7784d59270f06c3face418f9944230ccc659081c01c04d4f6d325487b8968": {
+    "item_id": "CORE-ACTOR-RESULT-EXAMPLE",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The evidence explicitly names the actor as Brian, states the desired result for loading and rendering the WebVOWL JSON, and provides a stable concrete URL example with the visible outcome of rendering 30 relation classes and 183 role nodes.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-ACTOR-RESULT-EXAMPLE",
+    "verdict": "pass"
+  },
+  "ec4039d7e38b212e539fd2c1a5c0f8a3c4a94426998246215b659ef362d636ae": {
+    "item_id": "CORE-UNCERTAINTIES",
+    "materiality": "non_material",
+    "missing": null,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "rationale": "The plan explicitly lists the uncertainty about whether additional files are needed and provides resolving evidence: the specified `git status --short` output showing only the two modified source files.",
+    "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-UNCERTAINTIES",
+    "verdict": "pass"
+  }
+}

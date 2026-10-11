@@ -1,0 +1,21 @@
+{
+  "schema_version": "method-activation-facts.v1",
+  "record_type": "method_activation_facts",
+  "plan_ref": "docs/plans/webvowl-open-json-by-url.md",
+  "plan_sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba",
+  "path_decision_ref": "docs/plans/webvowl-open-json-by-url.path-decision.json",
+  "path_decision_sha256": "b1d3d0b55c4a5b24abad6af8785d2a6a41dd79e4cac67d6c1201cada4c826df2",
+  "facts": {
+    "shared_mechanism": false,
+    "empirical_comparison_proposed": false,
+    "llm_central": false,
+    "irreversible_or_spend_action": false
+  },
+  "fact_sources": {
+    "shared_mechanism": "derived_current_boundary",
+    "empirical_comparison_proposed": "derived_current_boundary",
+    "llm_central": "derived_current_boundary",
+    "irreversible_or_spend_action": "derived_current_boundary"
+  },
+  "recorded_at": "2026-10-11T00:07:47Z"
+}

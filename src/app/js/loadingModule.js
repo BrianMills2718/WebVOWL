@@ -398,9 +398,21 @@ module.exports = function ( graph ){
   };
   
   function fallbackForJSON_URL( callback, parameter ){
-    ontologyMenu.append_message_toLastBulletPoint("<br>Trying to convert with other communication protocol.");
-    callback(parameter);
-    
+    // Without an OWL2VOWL service, a #url= that already points at WebVOWL JSON
+    // (for example an exported O2A projection) is read directly. Only if that
+    // fails do we fall back to the old read?json= protocol.
+    var jsonUrl = parameter[1];
+    ontologyMenu.append_message_toLastBulletPoint("<br>Reading WebVOWL JSON directly from " + jsonUrl);
+    d3.xhr(jsonUrl, "application/json", function ( error, request ){
+      if ( !error && request && request.responseText.length > 0 ) {
+        ontologyMenu.setCachedOntology(jsonUrl, request.responseText);
+        loadingWasSuccessFul = true;
+        parseOntologyContent(request.responseText);
+      } else {
+        ontologyMenu.append_message_toLastBulletPoint("<br>Direct read failed; trying to convert with other communication protocol.");
+        callback(parameter);
+      }
+    });
   }
   
   function fallbackConversion( parameter ){
