@@ -1,0 +1,18 @@
+{
+  "schema_version": "method-adoption-decision.v1",
+  "record_type": "method_adoption_decision",
+  "decision": "refused",
+  "plan_ref": "docs/plans/webvowl-open-json-by-url.md",
+  "plan_sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba",
+  "receipt_ref": "docs/plans/webvowl-open-json-by-url.receipt.json",
+  "receipt_sha256": "2b2b188edc49f61ea3813bb220ac592d8843571619c02e6a973161af25fd9386",
+  "receipt_result": "fail",
+  "reason_codes": [
+    "semantic_unresolved"
+  ],
+  "summary": [
+    "CORE-TRACE-DEBUGGING: semantic_unresolved -> Add to the plan: The evidence presents a heading for failures or surprises but does not explicitly establish that this procedure is separate from or distinct from anticipated failure modes.",
+    "CORE-SYSTEM-MODEL: semantic_unresolved -> Add to the plan: A valid system-model link and the required model-element, source-linked-view, freshness/drift, and reconciliation obligations are missing; the exemption is invalid because the plan explicitly concerns a user-facing WebVOWL viewer."
+  ],
+  "decided_at": "2026-10-11T00:08:14Z"
+}

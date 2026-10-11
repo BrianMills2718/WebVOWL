@@ -1535,7 +1535,7 @@ module.exports = function ( graphContainerSelector ){
     
     // using the ids of elements if to ensure that loaded elements will not get the same id;
     for ( var p = 0; p < unfilteredData.properties.length; p++ ) {
-      var currentId = unfilteredData.properties[p].id();
+      var currentId = String(unfilteredData.properties[p].id()); // ids may be JSON numbers (e.g. O2A exports)
       if ( currentId.indexOf('objectProperty') !== -1 ) {
         // could be ours;
         var idStr = currentId.split('objectProperty');
@@ -1549,7 +1549,7 @@ module.exports = function ( graphContainerSelector ){
     }
     // using the ids of elements if to ensure that loaded elements will not get the same id;
     for ( var n = 0; n < unfilteredData.nodes.length; n++ ) {
-      var currentId_Nodes = unfilteredData.nodes[n].id();
+      var currentId_Nodes = String(unfilteredData.nodes[n].id());
       if ( currentId_Nodes.indexOf('Class') !== -1 ) {
         // could be ours;
         var idStr_Nodes = currentId_Nodes.split('Class');

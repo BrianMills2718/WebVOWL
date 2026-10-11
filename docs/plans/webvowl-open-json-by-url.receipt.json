@@ -1,0 +1,538 @@
+{
+  "schema_version": "planning-method-conformance-receipt.v1",
+  "record_type": "planning_method_conformance_receipt",
+  "receipt_id": "RECEIPT-webvowl-open-json-by-url-605cfd538aaa",
+  "plan": {
+    "plan_ref": "docs/plans/webvowl-open-json-by-url.md",
+    "plan_sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+  },
+  "path_decision": {
+    "ref": "docs/plans/webvowl-open-json-by-url.path-decision.json",
+    "sha256": "b1d3d0b55c4a5b24abad6af8785d2a6a41dd79e4cac67d6c1201cada4c826df2",
+    "selected_path": "prototype",
+    "classified_path": "prototype",
+    "errors": []
+  },
+  "route": "inline_prototype",
+  "profile": {
+    "profile_id": "bounded-design",
+    "revision": "bounded-design@11",
+    "path": "contracts/method-conformance/profiles/bounded-design.v1.json",
+    "sha256": "0261c51b94b32a629bf6255b3c032c18cdbef4e8df6d5bed9db1f72d267c89cb"
+  },
+  "compiler": {
+    "path": "scripts/method_conformance/compiler.py",
+    "sha256": "e08f1a326de035b56e4e20bd6224439145f2373926a66672502c4b78a524105d"
+  },
+  "activation": {
+    "facts_ref": "docs/plans/webvowl-open-json-by-url.facts.json",
+    "facts_sha256": "24d135f2266c143ecb2bee49e62a25c5b9e6fe407fe6b49ec47bbfa6e124e3b6",
+    "facts": {
+      "shared_mechanism": false,
+      "empirical_comparison_proposed": false,
+      "llm_central": false,
+      "irreversible_or_spend_action": false,
+      "crosses_system_boundary": false,
+      "deploys": false,
+      "claims_external_standard": false,
+      "aes_governed_target": false,
+      "multiple_writers": false,
+      "consequential_boundary": false,
+      "inline_prototype": true
+    },
+    "fact_origins": {
+      "shared_mechanism": "declared:derived_current_boundary",
+      "empirical_comparison_proposed": "declared:derived_current_boundary",
+      "llm_central": "declared:derived_current_boundary",
+      "irreversible_or_spend_action": "declared:derived_current_boundary",
+      "crosses_system_boundary": "default:not_declared",
+      "deploys": "default:not_declared",
+      "claims_external_standard": "default:not_declared",
+      "aes_governed_target": "default:not_declared",
+      "multiple_writers": "derived:path_decision.concurrent_writers",
+      "consequential_boundary": "derived:path_decision.persistent_migration|consequential_external_mutation",
+      "inline_prototype": "derived:classified_path==prototype"
+    },
+    "overlays": [
+      {
+        "overlay_id": "OV-PRIOR-ART",
+        "activation_fact": "shared_mechanism",
+        "active": false,
+        "reason": "shared_mechanism=false (declared:derived_current_boundary)"
+      },
+      {
+        "overlay_id": "OV-EMPIRICAL-COMPARISON",
+        "activation_fact": "empirical_comparison_proposed",
+        "active": false,
+        "reason": "empirical_comparison_proposed=false (declared:derived_current_boundary)"
+      },
+      {
+        "overlay_id": "OV-LLM-CENTRAL",
+        "activation_fact": "llm_central",
+        "active": false,
+        "reason": "llm_central=false (declared:derived_current_boundary)"
+      },
+      {
+        "overlay_id": "OV-MULTIPLE-WRITERS",
+        "activation_fact": "multiple_writers",
+        "active": false,
+        "reason": "multiple_writers=false (derived:path_decision.concurrent_writers)"
+      },
+      {
+        "overlay_id": "OV-CONSEQUENTIAL-BOUNDARY",
+        "activation_fact": "consequential_boundary",
+        "active": false,
+        "reason": "consequential_boundary=false (derived:path_decision.persistent_migration|consequential_external_mutation)"
+      },
+      {
+        "overlay_id": "OV-INLINE-PROTOTYPE",
+        "activation_fact": "inline_prototype",
+        "active": true,
+        "reason": "inline_prototype=true (derived:classified_path==prototype)"
+      },
+      {
+        "overlay_id": "OV-SYSTEM-BOUNDARY",
+        "activation_fact": "crosses_system_boundary",
+        "active": false,
+        "reason": "crosses_system_boundary=false (default:not_declared)"
+      },
+      {
+        "overlay_id": "OV-DEPLOYMENT",
+        "activation_fact": "deploys",
+        "active": false,
+        "reason": "deploys=false (default:not_declared)"
+      },
+      {
+        "overlay_id": "OV-STANDARD-CONFORMANCE",
+        "activation_fact": "claims_external_standard",
+        "active": false,
+        "reason": "claims_external_standard=false (default:not_declared)"
+      },
+      {
+        "overlay_id": "OV-AES",
+        "activation_fact": "aes_governed_target",
+        "active": false,
+        "reason": "aes_governed_target=false (default:not_declared)"
+      }
+    ]
+  },
+  "checklist": {
+    "checklist_id": "method-conformance.bounded-design",
+    "revision": "sha256:d5862986f05ffe2afe411706b0052ca378a6abf6de00f0786703013d1a6cd677",
+    "definition_sha256": "01a5f66d954b101fcbd9585e92981633c5ccccabf92bfcd67340bf566c2f4246",
+    "bundle_ref": "docs/plans/webvowl-open-json-by-url.bundle.json",
+    "bundle_sha256": "f2b8956bdcb21dc3e184f1bad7d99ef614fead183cad38f49800dd1778e68693",
+    "coverage": "complete",
+    "definition_matches_recompilation": true
+  },
+  "items": [
+    {
+      "item_id": "CORE-ACTOR-RESULT-EXAMPLE",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#actor-and-result",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-ACTOR-RESULT-EXAMPLE",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The evidence explicitly names the actor as Brian, states the desired result for loading and rendering the WebVOWL JSON, and provides a stable concrete URL example with the visible outcome of rendering 30 relation classes and 183 role nodes.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-ROUTE",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "structural",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.path-decision.json",
+          "sha256": "b1d3d0b55c4a5b24abad6af8785d2a6a41dd79e4cac67d6c1201cada4c826df2"
+        }
+      ],
+      "semantic": null,
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-REQUIREMENTS-TRACED",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-REQUIREMENTS-TRACED",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The plan provides an explicit requirements list with R1–R3. Each requirement names a check and has the status “planned, not yet run”; the plan also states that it makes no claim to follow an external standard and names no release or completion records requiring deferred requirements to be carried forward.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-SUCCESS-DISPROOF",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#success-and-disproof",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-SUCCESS-DISPROOF",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The plan explicitly defines success through a real-browser check that verifies every exported relation label and exactly one role node per exported role spoke, with 183 of 183 rendered, plus no unexpected console errors. It also provides concrete disproof conditions: no graph, a missing relation or role node, a non-404 console error, or failure to load the existing foaf preset.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-TRACE-REVIEW",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#success-and-disproof",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-TRACE-REVIEW",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The evidence names the run whose full trace is reviewed, identifies its committed location, and specifies checks beyond the final outcome, including the command, exit status, named checks, skipped status, reset state, and per-model-element output. It also explicitly states that no model, agent, or LLM pipeline runs occur under the plan.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-TRACE-DEBUGGING",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "unresolved",
+      "verifier_result": "fail",
+      "reason_codes": [
+        "semantic_unresolved"
+      ],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#when-a-run-fails-or-surprises-us",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-TRACE-DEBUGGING",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "unresolved",
+        "materiality": "material",
+        "missing": "The evidence presents a heading for failures or surprises but does not explicitly establish that this procedure is separate from or distinct from anticipated failure modes.",
+        "rationale": "The quoted procedure explicitly covers preserving the failed run and trace ID, reviewing full execution details, citing and classifying divergence, retaining the original, and linking repair to a new traced verification run. However, it does not explicitly state its separation from anticipated failure-mode handling, which is a named requirement.",
+        "reused": false
+      },
+      "suggested_action": "Add to the plan: The evidence presents a heading for failures or surprises but does not explicitly establish that this procedure is separate from or distinct from anticipated failure modes."
+    },
+    {
+      "item_id": "CORE-SYSTEM-MODEL",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "unresolved",
+      "verifier_result": "fail",
+      "reason_codes": [
+        "semantic_unresolved"
+      ],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-SYSTEM-MODEL",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "unresolved",
+        "materiality": "material",
+        "missing": "A valid system-model link and the required model-element, source-linked-view, freshness/drift, and reconciliation obligations are missing; the exemption is invalid because the plan explicitly concerns a user-facing WebVOWL viewer.",
+        "rationale": "The plan states `System model: exempt -- WebVOWL is a static client-side viewer with no stored state`, but the requirement permits exemption only for projects with no stored state and no user-facing view. The evidence repeatedly describes a browser-rendered WebVOWL view, including `renders 30 O2A relation classes and 183 role nodes`, so the exemption does not apply.",
+        "reused": false
+      },
+      "suggested_action": "Add to the plan: A valid system-model link and the required model-element, source-linked-view, freshness/drift, and reconciliation obligations are missing; the exemption is invalid because the plan explicitly concerns a user-facing WebVOWL viewer."
+    },
+    {
+      "item_id": "CORE-CAPABILITY-REUSE",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#capability-reuse",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-CAPABILITY-REUSE",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The evidence explicitly identifies both catalogue files and states, “No catalogue entry fits,” with a reason: the need is a loading fix inside a specific forked viewer that has no catalogue entry. This satisfies the requirement’s no-entry alternative.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-AUTHORITY-NONGOALS",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#authority-and-non-goals",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-AUTHORITY-NONGOALS",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The evidence explicitly identifies Brian as the authority by stating he asked for the change in his own repository, and it explicitly lists non-goals: work outside the specified files, irreversible actions, and spending.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-IRREVERSIBLE-SPEND",
+      "effect": "blocking",
+      "applicability_mode": "conditional",
+      "condition_fact": "irreversible_or_spend_action",
+      "condition_value": false,
+      "verifier_kind": "semantic",
+      "disposition": "not_applicable",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [],
+      "semantic": null,
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-UNCERTAINTIES",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#uncertainties",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-UNCERTAINTIES",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The plan explicitly lists the uncertainty about whether additional files are needed and provides resolving evidence: the specified `git status --short` output showing only the two modified source files.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "CORE-ACTIVATION-FACTS",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#activation-facts",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-ACTIVATION-FACTS",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The plan explicitly states no shared mechanism, no LLM at the centre, and no irreversible action or spend, matching the corresponding false facts. It does not propose an A/B test, benchmark, bake-off, or other experiment comparing alternatives; its checks verify the built result, and it makes no explicit claim to follow an external standard or schema. No evidence indicates an AES-governed target.",
+        "reused": false
+      },
+      "suggested_action": null
+    },
+    {
+      "item_id": "OV-PROTO-VERTICAL-RESET",
+      "effect": "blocking",
+      "applicability_mode": "required",
+      "condition_fact": null,
+      "condition_value": null,
+      "verifier_kind": "semantic",
+      "disposition": "pass",
+      "verifier_result": "pass",
+      "reason_codes": [],
+      "evidence": [
+        {
+          "ref": "docs/plans/webvowl-open-json-by-url.md#vertical-and-reset",
+          "sha256": "605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba"
+        }
+      ],
+      "semantic": {
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/OV-PROTO-VERTICAL-RESET",
+        "model": "openrouter/openai/gpt-5.6-luna",
+        "verdict": "pass",
+        "materiality": "non_material",
+        "missing": null,
+        "rationale": "The evidence explicitly names the minimal vertical result (direct JSON loading and numeric element IDs rendering), the reset boundary (`git revert` of the commit), and the non-goals (anything outside the two listed files). It also explicitly states there is no coordinated-work ceremony.",
+        "reused": false
+      },
+      "suggested_action": null
+    }
+  ],
+  "item_counts": {
+    "pass": 10,
+    "unresolved": 2,
+    "not_applicable": 1,
+    "unavailable": 0,
+    "missing": 0
+  },
+  "semantic_verifier": {
+    "kind": "llm_client",
+    "available": true,
+    "model": "openrouter/openai/gpt-5.6-luna",
+    "task": "company_planning.method_conformance.semantic_item_review"
+  },
+  "conformance_report": {
+    "schema_version": "1.0",
+    "record_type": "planning_conformance_report",
+    "report_id": "REPORT-webvowl-open-json-by-url-605cfd538aaa",
+    "snapshot_ref": "SNAPSHOT-webvowl-open-json-by-url",
+    "snapshot_revision": "sha256:f2b8956bdcb21dc3e184f1bad7d99ef614fead183cad38f49800dd1778e68693",
+    "packet_ref": "docs/plans/webvowl-open-json-by-url.md",
+    "packet_revision": "sha256:605cfd538aaaa341b9a9723c7559402833e303c60cb5188148e5ebd5036783ba",
+    "structural_status": "pass",
+    "semantic_review_status": "complete",
+    "diagnostics": [
+      {
+        "diagnostic_id": "DIAG-webvowl-open-json-by-url-5",
+        "class": "semantic",
+        "severity": "warning",
+        "rule_id": "PL-MCR-SEMANTIC-UNRESOLVED",
+        "message": "CORE-TRACE-DEBUGGING: The evidence presents a heading for failures or surprises but does not explicitly establish that this procedure is separate from or distinct from anticipated failure modes.",
+        "source_locator": "docs/plans/webvowl-open-json-by-url.md",
+        "materiality": "material",
+        "suggested_action": "Add to the plan: The evidence presents a heading for failures or surprises but does not explicitly establish that this procedure is separate from or distinct from anticipated failure modes.",
+        "disposition": "unresolved",
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-TRACE-DEBUGGING"
+      },
+      {
+        "diagnostic_id": "DIAG-webvowl-open-json-by-url-6",
+        "class": "semantic",
+        "severity": "warning",
+        "rule_id": "PL-MCR-SEMANTIC-UNRESOLVED",
+        "message": "CORE-SYSTEM-MODEL: A valid system-model link and the required model-element, source-linked-view, freshness/drift, and reconciliation obligations are missing; the exemption is invalid because the plan explicitly concerns a user-facing WebVOWL viewer.",
+        "source_locator": "docs/plans/webvowl-open-json-by-url.md",
+        "materiality": "material",
+        "suggested_action": "Add to the plan: A valid system-model link and the required model-element, source-linked-view, freshness/drift, and reconciliation obligations are missing; the exemption is invalid because the plan explicitly concerns a user-facing WebVOWL viewer.",
+        "disposition": "unresolved",
+        "trace_id": "company-planning/method-conformance/webvowl-open-json-by-url/8916b3dd4559/CORE-SYSTEM-MODEL"
+      }
+    ],
+    "route": "inline_prototype",
+    "adoption_readiness": "contributor_disposition_needed",
+    "limitations": [
+      "Semantic verdicts judge only the cited plan excerpt against the item statement; they do not judge product strategy."
+    ]
+  },
+  "advisory_deviations": [],
+  "result": "fail",
+  "reason_codes": [
+    "semantic_unresolved"
+  ],
+  "actionable_summary": [
+    "CORE-TRACE-DEBUGGING: semantic_unresolved -> Add to the plan: The evidence presents a heading for failures or surprises but does not explicitly establish that this procedure is separate from or distinct from anticipated failure modes.",
+    "CORE-SYSTEM-MODEL: semantic_unresolved -> Add to the plan: A valid system-model link and the required model-element, source-linked-view, freshness/drift, and reconciliation obligations are missing; the exemption is invalid because the plan explicitly concerns a user-facing WebVOWL viewer."
+  ],
+  "limitations": [
+    "Semantic verdicts judge only the cited plan excerpt against the item statement; they do not judge product strategy."
+  ],
+  "caller": {
+    "client": "quick-adopt",
+    "session": "dd47e29f-679f-4f86-9f4b-0f7e5987007a"
+  },
+  "started_at": "2026-10-11T00:07:48Z",
+  "completed_at": "2026-10-11T00:08:14Z",
+  "duration_ms": 23110
+}

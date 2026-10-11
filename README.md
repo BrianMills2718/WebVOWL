@@ -59,6 +59,19 @@ Instead of the last step of the simple setup, install the npm package `grunt-cli
 * `grunt zip` builds the project and puts it into a zip file
 
 
+Opening a WebVOWL JSON file by URL
+----------------------------------
+
+`index.html#url=<URL of a WebVOWL JSON file>` asks the OWL2VOWL service first; on a
+static host with no service it now reads that JSON directly (the URL's server must
+allow cross-origin reads). Element ids may be strings or numbers. Add
+`#opts=doc=0;` before `#url=` to turn off automatic degree collapsing, which
+otherwise hides one-link nodes such as O→A role spokes:
+
+```
+http://127.0.0.1:8797/#opts=doc=0;#url=http://127.0.0.1:8796/explorer/views/o2a-webvowl.json
+```
+
 Additional information
 ----------------------
 
